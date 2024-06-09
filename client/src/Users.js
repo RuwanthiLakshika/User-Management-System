@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 const Users = () => {
     const [users, setUsers] = useState([]);
     const [submitted, setSubmitted] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
+    const [selectedUser, setSelectedUser] = useState({});
 
     useEffect(() => {
         getUsers();
@@ -34,6 +36,24 @@ const Users = () => {
             .then(() => {
                 getUsers();
                 setSubmitted(false);
+                isEdit(false);
+        })
+        .catch(error => {
+            console.error("Error adding user:", error);
+        });
+    }
+
+    const updateUser = (data) => {
+        setSubmitted(true);
+
+        const payload = {
+            id: data.id,
+            name: data.name,
+        };
+        Axios.put('http://localhost:3001/api/updateuser', payload)
+            .then(() => {
+                getUsers();
+                setSubmitted(false);
         })
         .catch(error => {
             console.error("Error adding user:", error);
@@ -51,8 +71,17 @@ const Users = () => {
             <UserForm
                 addUser={addUser}
                 submitted={submitted}
+                data={selectedUser}
+                isEdit={isEdit}
+                updateUser={updateUser}
             />
-            <UsersTable rows={users}/>
+            <UsersTable 
+                rows={users}
+                selectedUser={data => {
+                    setSelectedUser(data);
+                    setIsEdit(true);
+                }}
+                />
         </Box>
         
     );
