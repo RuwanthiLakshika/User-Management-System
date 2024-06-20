@@ -1,4 +1,4 @@
-# User-Management-System (Ongoing)
+# User-Management-System 
 Frontend : React | Material UI     
 Backend : Node | Express
 Database : Mongodb
