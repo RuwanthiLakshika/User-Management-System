@@ -16,7 +16,7 @@ const Users = () => {
     }, []);
 
     const getUsers = () => {
-        Axios.get('http://localhost:3001/api/users')
+        Axios.get('http://localhost:8080/api/v1/getusers')
             .then(response => {
                setUsers(response.data || []);
         })
@@ -32,14 +32,14 @@ const Users = () => {
             id: data.id,
             name: data.name,
         };
-        Axios.post('http://localhost:3001/api/createuser', payload)
+        Axios.post('http://localhost:8080/api/v1/adduser', payload)
             .then(() => {
                 getUsers();
                 setSubmitted(false);
                 isEdit(false);
         })
         .catch(error => {
-            console.error("Error adding user:", error);
+            console.log("Error adding user:", error);
         });
     }
 
@@ -50,7 +50,7 @@ const Users = () => {
             id: data.id,
             name: data.name,
         };
-        Axios.put('http://localhost:3001/api/updateuser', payload)
+        Axios.put('http://localhost:8080/api/v1/updateuser', payload)
             .then(() => {
                 getUsers();
                 setSubmitted(false);
@@ -61,12 +61,19 @@ const Users = () => {
     }
 
     const deleteUser = (data) => {
-        Axios.post('http://localhost:3001/api/deleteuser', data)
+        setSubmitted(true);
+
+        const payload = {
+            id: data.id,
+            name: data.name,
+        };
+        Axios.delete('http://localhost:8080/api/v1/deleteuser', {data: payload})
             .then(() => {
                 getUsers();
+                setSubmitted(false);
         })
         .catch(error => {
-            console.error("Error deleting user:", error);
+            console.log("Error deleting user:", error);
         });
     }
 
