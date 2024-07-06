@@ -14,5 +14,6 @@ Frontend : React | Material UI
 Backend : Java | SpringBoot     
 Database : MySQL
 
+![Screenshot (182)](https://github.com/RuwanthiLakshika/User-Management-System/assets/125971277/6e2a2669-3d52-4610-9172-fdf63a3643a6)
 
 
