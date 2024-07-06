@@ -71,11 +71,27 @@ const Users = () => {
             .then(() => {
                 getUsers();
                 setSubmitted(false);
+                setIsEdit(false);
         })
         .catch(error => {
             console.log("Error deleting user:", error);
         });
     }
+
+    // const deleteUser = (data) => {
+    //     setSubmitted(true);
+
+    //     Axios.delete(`http://localhost:8080/api/v1/deleteuser/${data.id}`)
+    //         .then(() => {
+    //             getUsers();
+    //             setSubmitted(false);
+    //             setIsEdit(false);
+    //     })
+    //     .catch(error => {
+    //         console.log("Error deleting user:", error);
+    //     });
+    // }
+
 
     return (
         <Box
